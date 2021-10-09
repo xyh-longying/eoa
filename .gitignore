@@ -1,0 +1,7 @@
+# Project exclude paths
+/eoa-admin/target/
+/eoa-common/target/
+/eoa-framework/target/
+/eoa-generator/target/
+/eoa-quartz/target/
+/eoa-system/target/
