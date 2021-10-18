@@ -220,6 +220,13 @@
                 <version>${eoa.version}</version>
             </dependency>
 
+            <!-- 办公模块-->
+            <dependency>
+                <groupId>com.eoa</groupId>
+                <artifactId>eoa-office</artifactId>
+                <version>${eoa.version}</version>
+            </dependency>
+
             <!-- 通用工具-->
             <dependency>
                 <groupId>com.eoa</groupId>
@@ -237,6 +244,7 @@
         <module>eoa-quartz</module>
         <module>eoa-generator</module>
         <module>eoa-common</module>
+        <module>eoa-office</module>
     </modules>
 
     <packaging>pom</packaging>

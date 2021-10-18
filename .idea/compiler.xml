@@ -6,12 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="eoa-system" />
         <module name="eoa-quartz" />
+        <module name="eoa-office" />
+        <module name="eoa-admin" />
+        <module name="eoa-system" />
         <module name="eoa-common" />
         <module name="eoa-generator" />
         <module name="eoa-framework" />
-        <module name="eoa-admin" />
       </profile>
     </annotationProcessing>
   </component>

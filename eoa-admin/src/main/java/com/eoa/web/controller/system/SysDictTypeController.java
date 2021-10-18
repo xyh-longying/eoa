@@ -4,6 +4,7 @@ import com.eoa.common.annotation.Log;
 import com.eoa.common.constant.UserConstants;
 import com.eoa.common.core.controller.BaseController;
 import com.eoa.common.core.domain.AjaxResult;
+import com.eoa.common.core.domain.Ztree;
 import com.eoa.common.core.domain.entity.SysDictType;
 import com.eoa.common.core.page.TableDataInfo;
 import com.eoa.common.enums.BusinessType;
@@ -125,5 +126,28 @@ public class SysDictTypeController extends BaseController {
     @ResponseBody
     public String checkDictTypeUnique(SysDictType dictType){
         return dictTypeService.checkDictTypeUnique(dictType);
+    }
+
+    /**
+     * 选择字典树
+     */
+    @GetMapping("/selectDictTree/{columnId}/{dictType}")
+    public String selectDeptTree(@PathVariable("columnId") Long columnId, @PathVariable("dictType") String dictType,
+                                 ModelMap mmap)
+    {
+        mmap.put("columnId", columnId);
+        mmap.put("dict", dictTypeService.selectDictTypeByType(dictType));
+        return prefix + "/tree";
+    }
+
+    /**
+     * 加载字典列表树
+     */
+    @GetMapping("/treeData")
+    @ResponseBody
+    public List<Ztree> treeData()
+    {
+        List<Ztree> ztrees = dictTypeService.selectDictTree(new SysDictType());
+        return ztrees;
     }
 }

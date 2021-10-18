@@ -33,7 +33,7 @@ public class GenConfig {
     }
 
     @Value("${author}")
-    public static void setAuthor(String author) {
+    public void setAuthor(String author) {
         GenConfig.author = author;
     }
 
@@ -42,7 +42,7 @@ public class GenConfig {
     }
 
     @Value("${packageName}")
-    public static void setPackageName(String packageName) {
+    public void setPackageName(String packageName) {
         GenConfig.packageName = packageName;
     }
 
@@ -51,7 +51,7 @@ public class GenConfig {
     }
 
     @Value("${autoRemovePre}")
-    public static void setAutoRemovePre(boolean autoRemovePre) {
+    public void setAutoRemovePre(boolean autoRemovePre) {
         GenConfig.autoRemovePre = autoRemovePre;
     }
 
@@ -60,7 +60,7 @@ public class GenConfig {
     }
 
     @Value("${tablePrefix}")
-    public static void setTablePrefix(String tablePrefix) {
+    public void setTablePrefix(String tablePrefix) {
         GenConfig.tablePrefix = tablePrefix;
     }
 }

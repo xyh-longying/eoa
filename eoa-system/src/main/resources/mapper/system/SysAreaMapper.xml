@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eoa.system.mapper.SysAreaMapper">
+    
+    <resultMap type="SysArea" id="SysAreaResult">
+        <result property="areaId"    column="area_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="areaName"    column="area_name"    />
+        <result property="shortName"    column="short_name"    />
+        <result property="longitude"    column="longitude"    />
+        <result property="latitude"    column="latitude"    />
+        <result property="level"    column="level"    />
+        <result property="sort"    column="sort"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="parentName" column="parent_name" />
+    </resultMap>
+
+    <sql id="selectSysAreaVo">
+        select area_id, parent_id, area_name, short_name, longitude, latitude, level, sort, status, create_by, create_time, update_by, update_time from sys_area
+    </sql>
+
+    <select id="selectSysAreaList" parameterType="SysArea" resultMap="SysAreaResult">
+        <include refid="selectSysAreaVo"/>
+        <where>  
+            <if test="areaName != null  and areaName != ''"> and area_name like concat('%', #{areaName}, '%')</if>
+            <if test="shortName != null  and shortName != ''"> and short_name like concat('%', #{shortName}, '%')</if>
+            <if test="level != null "> and level = #{level}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+        </where>
+        order by area_id
+    </select>
+    
+    <select id="selectSysAreaByAreaId" parameterType="Long" resultMap="SysAreaResult">
+        select t.area_id, t.parent_id, t.area_name, t.short_name, t.longitude, t.latitude, t.level, t.sort, t.status, t.create_by, t.create_time, t.update_by, t.update_time, p.area_name as parent_name
+        from sys_area t
+        left join sys_area p on p.area_id = t.parent_id
+        where t.area_id = #{areaId}
+    </select>
+        
+    <insert id="insertSysArea" parameterType="SysArea" useGeneratedKeys="false" keyProperty="areaId">
+        insert into sys_area
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="areaId != null">area_id,</if>
+            <if test="parentId != null">parent_id,</if>
+            <if test="areaName != null and areaName != ''">area_name,</if>
+            <if test="shortName != null and shortName != ''">short_name,</if>
+            <if test="longitude != null">longitude,</if>
+            <if test="latitude != null">latitude,</if>
+            <if test="level != null">level,</if>
+            <if test="sort != null">sort,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="areaId != null">#{areaId},</if>
+            <if test="parentId != null">#{parentId},</if>
+            <if test="areaName != null and areaName != ''">#{areaName},</if>
+            <if test="shortName != null and shortName != ''">#{shortName},</if>
+            <if test="longitude != null">#{longitude},</if>
+            <if test="latitude != null">#{latitude},</if>
+            <if test="level != null">#{level},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysArea" parameterType="SysArea">
+        update sys_area
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="areaName != null and areaName != ''">area_name = #{areaName},</if>
+            <if test="shortName != null and shortName != ''">short_name = #{shortName},</if>
+            <if test="longitude != null">longitude = #{longitude},</if>
+            <if test="latitude != null">latitude = #{latitude},</if>
+            <if test="level != null">level = #{level},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where area_id = #{areaId}
+    </update>
+
+    <delete id="deleteSysAreaByAreaId" parameterType="Long">
+        delete from sys_area where area_id = #{areaId}
+    </delete>
+
+    <delete id="deleteSysAreaByAreaIds" parameterType="String">
+        delete from sys_area where area_id in 
+        <foreach item="areaId" collection="array" open="(" separator="," close=")">
+            #{areaId}
+        </foreach>
+    </delete>
+
+</mapper>

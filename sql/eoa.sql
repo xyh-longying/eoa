@@ -686,27 +686,49 @@ create table gen_table (
 -- ----------------------------
 drop table if exists gen_table_column;
 create table gen_table_column (
-                                  column_id         bigint(20)      not null auto_increment    comment '编号',
-                                  table_id          varchar(64)                                comment '归属表编号',
-                                  column_name       varchar(200)                               comment '列名称',
-                                  column_comment    varchar(500)                               comment '列描述',
-                                  column_type       varchar(100)                               comment '列类型',
-                                  java_type         varchar(500)                               comment 'JAVA类型',
-                                  java_field        varchar(200)                               comment 'JAVA字段名',
-                                  is_pk             char(1)                                    comment '是否主键（1是）',
-                                  is_increment      char(1)                                    comment '是否自增（1是）',
-                                  is_required       char(1)                                    comment '是否必填（1是）',
-                                  is_insert         char(1)                                    comment '是否为插入字段（1是）',
-                                  is_edit           char(1)                                    comment '是否编辑字段（1是）',
-                                  is_list           char(1)                                    comment '是否列表字段（1是）',
-                                  is_query          char(1)                                    comment '是否查询字段（1是）',
-                                  query_type        varchar(200)    default 'EQ'               comment '查询方式（等于、不等于、大于、小于、范围）',
-                                  html_type         varchar(200)                               comment '显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）',
-                                  dict_type         varchar(200)    default ''                 comment '字典类型',
-                                  sort              int                                        comment '排序',
-                                  create_by         varchar(64)     default ''                 comment '创建者',
-                                  create_time 	    datetime                                   comment '创建时间',
-                                  update_by         varchar(64)     default ''                 comment '更新者',
-                                  update_time       datetime                                   comment '更新时间',
-                                  primary key (column_id)
+                          column_id         bigint(20)      not null auto_increment    comment '编号',
+                          table_id          varchar(64)                                comment '归属表编号',
+                          column_name       varchar(200)                               comment '列名称',
+                          column_comment    varchar(500)                               comment '列描述',
+                          column_type       varchar(100)                               comment '列类型',
+                          java_type         varchar(500)                               comment 'JAVA类型',
+                          java_field        varchar(200)                               comment 'JAVA字段名',
+                          is_pk             char(1)                                    comment '是否主键（1是）',
+                          is_increment      char(1)                                    comment '是否自增（1是）',
+                          is_required       char(1)                                    comment '是否必填（1是）',
+                          is_insert         char(1)                                    comment '是否为插入字段（1是）',
+                          is_edit           char(1)                                    comment '是否编辑字段（1是）',
+                          is_list           char(1)                                    comment '是否列表字段（1是）',
+                          is_query          char(1)                                    comment '是否查询字段（1是）',
+                          query_type        varchar(200)    default 'EQ'               comment '查询方式（等于、不等于、大于、小于、范围）',
+                          html_type         varchar(200)                               comment '显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）',
+                          dict_type         varchar(200)    default ''                 comment '字典类型',
+                          sort              int                                        comment '排序',
+                          create_by         varchar(64)     default ''                 comment '创建者',
+                          create_time 	    datetime                                   comment '创建时间',
+                          update_by         varchar(64)     default ''                 comment '更新者',
+                          update_time       datetime                                   comment '更新时间',
+                          primary key (column_id)
 ) engine=innodb auto_increment=1 comment = '代码生成业务表字段';
+
+
+-- ----------------------------
+-- 21、行政区域地址表
+-- ----------------------------
+drop table if exists sys_area;
+create table sys_area (
+                          area_id           bigint(20)      not null auto_increment    comment '行政区ID',
+                          parent_id         bigint(20)      not null default '0'       comment '父级ID',
+                          area_name         varchar(50)     not null                   comment '行政区名称',
+                          short_name        varchar(50)     not null                   comment '简称',
+                          longitude         double          not null default '0'       comment '经度',
+                          latitude          double          not null default '0'       comment '纬度',
+                          level             int(1)          not null                   comment '等级(1省/直辖市,2地级市,3区县,4镇/街道)',
+                          sort              int(3)          not null default '1'       comment '排序',
+                          status            int(1)          not null default '0'       comment '状态(0禁用/1启用)',
+                          create_by         varchar(64)     default ''                 comment '创建者',
+                          create_time 	    datetime                                   comment '创建时间',
+                          update_by         varchar(64)     default ''                 comment '更新者',
+                          update_time       datetime                                   comment '更新时间',
+                          primary key (area_id)
+) engine=innodb auto_increment=1 comment = '行政区域地址表';
