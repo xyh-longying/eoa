@@ -10,6 +10,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>eoa-common</artifactId>
+    <packaging>jar</packaging>
     <description>
         common通用工具
     </description>

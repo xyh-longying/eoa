@@ -99,6 +99,23 @@
                     <warName>${project.artifactId}</warName>
                 </configuration>
             </plugin>
+            <!--springBoot 工程docker化部署-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+                    <imageName>eoa-admin</imageName>
+                    <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
             <!-- YUI Compressor (CSS/JS压缩) 
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
